@@ -6,4 +6,8 @@ module.exports = class PortfolioModel{
         return db.query("SELECT * FROM portfolio",callback)
     }
 
+    static getId(id,callback){
+        return db.query("SELECT * FROM portfolio WHERE id_portfolio = ?",[id],callback)
+    }
+
 }

@@ -22,4 +22,23 @@ router.get('/',function(req,res,next){
 
 });
 
+router.get('/:id?',function(req,res,next){
+
+    PortfolioModel.getId(req.params.id,function(erro,retorno){
+        let resposta = new RespostaClass();
+
+        if(erro){
+            resposta.erro = true;
+            resposta.msg ='ocorreu um erro';
+            console.log('erro: ',erro)
+            console.log("ocorreu um erro ",erro)
+        }else {
+            resposta.dados =retorno
+        }
+
+        res.json(resposta);
+    })
+
+});
+
 module.exports = router;

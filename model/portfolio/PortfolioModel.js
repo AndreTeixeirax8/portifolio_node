@@ -15,4 +15,10 @@ module.exports = class PortfolioModel{
         [portfolio.descricao,portfolio.detalhes],callback)
     }
 
+    static deletar(id,callback){
+        return db.query("DELETE FROM portfolio where id_portfolio =?",
+        [id],callback);
+        
+    }
+
 }

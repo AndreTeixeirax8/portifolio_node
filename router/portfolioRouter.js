@@ -65,4 +65,28 @@ router.post('/?',function(req,res,next){
 
 });
 
+router.delete('/:id',function(req,res,next){
+
+    PortfolioModel.deletar(req.params.id,function(erro,retorno){
+        let resposta = new RespostaClass();
+
+        if(erro){
+            resposta.erro = true;
+            resposta.msg ='ocorreu um erro';
+            console.log('erro: ',erro)
+            console.log("ocorreu um erro ",erro)
+        }else {
+            if(retorno.affectedRows > 0){
+                resposta.msg = "realizado com sucesso"
+            }else{
+                resposta.erro =true;
+                resposta.msg = 'naõ foi possivel cadastrar'
+            }
+        }
+
+        res.json(resposta);
+    })
+
+});
+
 module.exports = router;

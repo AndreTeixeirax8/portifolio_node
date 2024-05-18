@@ -41,4 +41,28 @@ router.get('/:id?',function(req,res,next){
 
 });
 
+router.post('/?',function(req,res,next){
+
+    PortfolioModel.adicionar(req.body,function(erro,retorno){
+        let resposta = new RespostaClass();
+
+        if(erro){
+            resposta.erro = true;
+            resposta.msg ='ocorreu um erro';
+            console.log('erro: ',erro)
+            console.log("ocorreu um erro ",erro)
+        }else {
+            if(retorno.affectedRows > 0){
+                resposta.msg = "cadastro realizado"
+            }else{
+                resposta.erro =true;
+                resposta.msg = 'naõ foi possivel cadastrar'
+            }
+        }
+
+        res.json(resposta);
+    })
+
+});
+
 module.exports = router;
